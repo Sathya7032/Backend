@@ -28,10 +28,7 @@ SECRET_KEY = 'django-insecure-betov3+aey1)zo=hno2i-g*p%1ju^%$!h!bk!do&w@jj_6wpn+
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'www.acadamicfolio.online',
-    'acadamicfolios.pythonanywhere.com',
     'acadamicfolio.online',
-    'www.acadamicfolio.info',
     'https://acadamicfolio.online',
     '*',
 ]
@@ -86,9 +83,7 @@ REST_FRAMEWORK = {
 
 }
 
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+
 
 # settings.py
 CORS_ORIGIN_ALLOW_ALL = True
@@ -229,15 +224,6 @@ SITE_ID = 1
 
 
 
-
-
-
-
-
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://www.acadamicfolio.info',
-]
 
 CSRF_COOKIE_NAME = 'csrftoken'
 
