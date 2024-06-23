@@ -83,7 +83,10 @@ REST_FRAMEWORK = {
 
 }
 
-
+CORS_ALLOWED_ORIGINS = [
+    "https://www.acadamicfolio.info",
+    "https://acadamicfolio.info",
+]
 
 # settings.py
 CORS_ORIGIN_ALLOW_ALL = True
