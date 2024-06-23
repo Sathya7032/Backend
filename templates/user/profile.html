@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Admin User Profile</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Date Joined</th>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            <tr>
+                <th>Last Login</th>
+                <td>{{ user.last_login }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'admin_user_detail' %}" class="btn btn-primary">Edit Details</a>
+        <a href="{% url 'admin_user_password_change' %}" class="btn btn-warning">Change Password</a>
+    </div>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
