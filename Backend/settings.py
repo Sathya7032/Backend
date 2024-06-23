@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     'www.acadamicfolio.online',
     'acadamicfolios.pythonanywhere.com',
     'www.acadamicfolio.info',
-    'https://acadamicfolio.online.com',
+    'https://acadamicfolio.online',
     '*',
 ]
 
