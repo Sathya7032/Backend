@@ -9,10 +9,7 @@
       }
     ],
     "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/staticfiles/"
-      },
+    
       {
         "src": "/(.*)",
         "dest": "/wsgi.py"
@@ -22,8 +19,7 @@
       "env": {
         "DJANGO_SETTINGS_MODULE": "Backend.settings",
         "PYTHONUNBUFFERED": "1"
-      },
-      "command": "python manage.py collectstatic --noinput && python manage.py migrate"
+      }
     }
     
   }
