@@ -125,11 +125,11 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME':'acadamic',
-         'USER':'postgres',
-         'PASSWORD':'Sathi7661$',
-         'HOST':'acadamic.cfam0e6qmysg.eu-north-1.rds.amazonaws.com',
-         'PORT':'5432'
+         'NAME':'postgres',
+         'USER':'postgres.ttsfvzorpqzuvgqrchad',
+         'PASSWORD':'Sathi766187$',
+         'HOST':'aws-0-ap-southeast-1.pooler.supabase.com',
+         'PORT':'6543'
      }
 }
 
