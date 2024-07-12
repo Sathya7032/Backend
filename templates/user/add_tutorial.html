@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Add Tutorial Name</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addTopicModalLabel">Add Topic</h5>
+            <button type="button" class="btn-close" onclick="window.close();" aria-label="Close"></button>
+        </div>
+
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        <div class="modal-body">
+            <form  method="post" action="/add_tutorial/" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.tutorialName.id_for_label }}" class="form-label">Tutorial Name:</label>
+                    {{ form.tutorialName }}
+                    {% if form.tutorialName.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.tutorialName.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.tutorialContent.id_for_label }}" class="form-label">Tutorial Content:</label>
+                    {{ form.tutorialContent }}
+                    {% if form.tutorialContent.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.tutorialContent.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.tutorialImage.id_for_label }}" class="form-label">Tutorial Name:</label>
+                    {{ form.tutorialImage }}
+                    {% if form.tutorialImage.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.tutorialImage.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Topic</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  
+</body>
+
+</html>
+

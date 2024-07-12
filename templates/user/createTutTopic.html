@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <title>Add Tutorial Topic</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-6">
+                <h1><span style="color: black;">Academic</span><span style="color: tomato;">Folio</span></h1>
+            </div>
+            <div class="col-md-6">
+                <p class="mb-0 text-end" style="color: brown; font-size: large; font-weight: bold;">
+                    <i class="fas fa-envelope"></i> acadamicfolio@gmail.com
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: darkcyan; padding: 75px;">
+        <div class="container p-2 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <h2 class="text-white text-center p-3"
+                        style="background-color: darkslategray; border-radius: 12px;">
+                        Upload Code</h2>
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    <div class="card p-4">
+                        <form action="/add_post/" method="post">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label for="{{ form.post_title.id_for_label }}" class="form-label">Title:</label>
+                                {{ form.post_title }}
+                                {% if form.post_title.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.post_title.errors %}
+                                    <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.post_content.id_for_label }}" class="form-label">Content:</label>
+                                <div id="post_content_editor"></div>
+                                <textarea style="display:none;" name="{{ form.post_content.name }}" id="{{ form.post_content.id_for_label }}"></textarea>
+                                {% if form.post_content.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.post_content.errors %}
+                                            <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.post_video.id_for_label }}" class="form-label">Video URL:</label>
+                                {{ form.post_video }}
+                                {% if form.post_video.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.post_video.errors %}
+                                    <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.post_file.id_for_label }}" class="form-label">YouTube:</label>
+                                {{ form.post_file }}
+                                {% if form.post_file.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.post_file.errors %}
+                                    <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.tutorialName.id_for_label }}" class="form-label">Topic:</label>
+                                <div class="d-flex">
+                                    {{ form.tutorialName }}
+                                    <button type="button" class="btn btn-primary ms-2" onclick="openAddTutorialModal()">
+                                        Add
+                                    </button>
+                                </div>
+                                {% if form.tutorialName.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.tutorialName.errors %}
+                                    <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-dark" type="submit">Upload Code</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Quill JavaScript -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        var quill = new Quill('#post_content_editor', {
+            theme: 'snow',
+            placeholder: 'Write your content here...'
+        });
+        var formContentInput = document.getElementById("{{ form.post_content.id_for_label }}");
+        quill.on('text-change', function() {
+            formContentInput.value = quill.root.innerHTML;
+        });
+        formContentInput.value = quill.root.innerHTML;
+    </script>
+
+    <script>
+        function openAddTutorialModal() {
+            const modal = window.open('/add_tutorial/', 'Add Topic', 'width=600,height=400');
+        }
+
+        function addTopicToSelect(topicId, topicName) {
+            const topicSelect = document.getElementById('{{ form.tutorialName.id_for_label }}');
+            const newOption = document.createElement('option');
+            newOption.value = topicId;
+            newOption.textContent = topicName;
+            topicSelect.appendChild(newOption);
+            topicSelect.value = topicId;
+        }
+    </script>
+</body>
+
+</html>

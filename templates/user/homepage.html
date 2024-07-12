@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>AcadamicFolio</title>
+    <style>
+        /* Custom CSS for hover color */
+        .list-group-item-action:hover {
+            background-color: darkseagreen; /* Change this to your desired hover color */
+            color: darkslategray; /* Text color on hover */
+            font-size: x-large;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-6">
+                <h1><span style="color: black;">Acadamic</span><span style="color: tomato;">Folio</span></h1>
+            </div>
+            <div class="col-md-6">
+                <p class="mb-0 text-end" style="color: brown;font-size: large;font-weight: bold;">
+                    <i class="fas fa-envelope"></i> acadamicfolio@gmail.com
+                </p>
+            </div>
+        </div>
+    </div>
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}} </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="container-fluid py-5" style="background-color: darkcyan;">
+        <div class="container text-center"> <!-- Added text-center class to center the content -->
+            <h1 style="color: orange;">Welcome to dashboard {{user.username}}</h1>
+            <p class="text-white fw-bold" style="font-family: Georgia, 'Times New Roman', Times, serif;">Thank you for
+                being an integral part
+                of our website.</p>
+            <a href="/logout/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Logout</a> <!-- Removed ml-auto -->
+                <a href="/profile/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Profile</a> <!-- Removed ml-auto -->
+        </div>
+    </div>
+    <div class="container-fluid py-5" style="background-color: darkgray;">
+        <div class="container text-center">
+            <a href="/post_meme/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Add meme</a>
+            <a href="/post_code/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Add Code snippet</a>
+            <a href="/add_post/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Add Tutorial topic</a>
+            <a href="/post_blog/" style="background-color: tomato;color: aliceblue;"
+                class="btn py-md-2 px-md-4 font-weight-semi-bold mt-2">Add Blog</a>
+        </div>
+    </div>
+    <div class="container-fluid py-5" style="background-color: white;">
+        <h3 style="color: darkslategrey;" class="text-center">Code Snippets Uploaded by {{ user.username }}</h3>
+        {% if user_codes %}
+        <ul class="list-group">
+            {% for snippet in user_codes %}
+            <a href="/codes/{{snippet.code_id}}/" class="list-group-item list-group-item-action" aria-current="true">
+                {{ snippet.title }}
+            </a>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p>No code snippets uploaded by this user.</p>
+        {% endif %}
+        <hr style="color: black;"/>
+    </div>
+
+    <div class="container-fluid py-2" style="background-color: white;">
+        <h3 style="color: darkslategrey;" class="text-center">Blogs Uploaded by {{ user.username }}</h3>
+        {% if blog %}
+        <ul class="list-group">
+            {% for blog in blog %}
+            <a href="/blogs/{{blog.id}}/" class="list-group-item list-group-item-action" aria-current="true">
+                {{ blog.title }}
+            </a>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p>No code snippets uploaded by this user.</p>
+        {% endif %}
+        <hr style="color: black;"/>
+    </div>
+
+
+    <div class="container-fluid py-2" style="background-color: white;">
+        <h3 style="color: darkslategrey;" class="text-center">Topics Uploaded by {{ user.username }}</h3>
+        {% if topics %}
+        <ul class="list-group">
+            {% for topics in topics %}
+            <a href="/topics/{{topics.post_id}}/" class="list-group-item list-group-item-action" aria-current="true">
+                {{ topics.post_title }}
+            </a>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p>No code snippets uploaded by this user.</p>
+        {% endif %}
+        <hr style="color: black;"/>
+    </div>
+
+
+    <div class="container-fluid py-2" style="background-color: white;">
+        <h3 style="color: darkslategrey;" class="text-center">Memes Uploaded by {{ user.username }}</h3>
+        {% if meme %}
+        <ul class="list-group">
+            {% for meme in meme %}
+            <a href="/memes/{{meme.id}}/" class="list-group-item list-group-item-action" aria-current="true">
+                {{ meme.description }}
+            </a>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p>No code snippets uploaded by this user.</p>
+        {% endif %}
+        <hr style="color: black;"/>
+    </div>
+
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
