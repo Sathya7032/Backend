@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-6d^6v(2#nn=2a182!+d%v7d!*a1__$i^q!*$mg0#*=inco+4%f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["acadamicfolios.pythonanywhere.com"]
 
 
 # Application definition
